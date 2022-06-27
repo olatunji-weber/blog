@@ -1,6 +1,11 @@
 <%- include("partials/header"); -%>
 
     <h1>Home</h1>
-    <p><%= startingString %></p>
+    <p><%= startingString %></p><hr>
+
+    <% postString.forEach(function(post){ %>
+        <h1> <%= post.title %> </h1>
+        <p> <%= post.body %> </p>
+    <% }); %>
 
 <%- include("partials/footer"); -%>
