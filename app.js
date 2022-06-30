@@ -43,12 +43,17 @@ app.post("/compose", function(req, res){
   res.redirect("/");
 });
 
-app.get("/posts/:anything", function(req, res){
+app.get("/posts/:postTitle", function(req, res){ 
+  const requestedTitle = _.lowerCase(req.params.postTitle);
+
   posts.forEach(function(post){
-    if(_.lowerCase(req.params.anything) === _.lowerCase(post.title)){
-      res.render("post", {post: post});
-    }else{
-      res.render("post", {post: {title:"No Match", body: "There was no match found...."}});
+    const storedTitle = _.lowerCase(post.title);
+    
+    if(requestedTitle === storedTitle){
+      res.render("post", {
+        title: post.title,
+        body: post.body
+      });
     }
   });
 });
